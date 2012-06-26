@@ -17,6 +17,7 @@ import org.shout2me.entity.Message;
 import org.shout2me.entity.User;
 import org.shout2me.entity.dao.IslandDAO;
 import org.shout2me.entity.to.IslandTO;
+import org.shout2me.entity.to.IslandTOWrapper;
 import org.shout2me.service.util.KeyUtil;
 import org.shout2me.service.util.ValidationUtil;
 
@@ -85,7 +86,7 @@ public class IslandService {
 	@GET
 	@Path("/getall")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public List<IslandTO> getByDistance(
+	public IslandTOWrapper getByDistanceW(
 			@QueryParam("longitude") Double longitude,
 			@QueryParam("latitude") Double latitude,
 			@QueryParam("distance") Double distance,
@@ -99,13 +100,15 @@ public class IslandService {
 		List<Island> islands = i_dao.getIslandsByArea(longitude, latitude,
 				distance, max_results);
 		if (islands.size() == 0) {
-			return Collections.<IslandTO> emptyList();
+			return new IslandTOWrapper();
 		}
 		List<IslandTO> result = new ArrayList<IslandTO>();
 		for (Island i : islands) {
 			result.add(new IslandTO(i));
 		}
-		return result;
+		IslandTOWrapper itw = new IslandTOWrapper();
+		itw.setIslands(result);
+		return itw;
 	}
 
 	@GET

@@ -25,10 +25,10 @@ public class Island {
 	private String name;
 	@Persistent(nullValue = NullValue.EXCEPTION)
 	@Longitude
-	private Double longitude;
+	private double longitude;
 	@Persistent(nullValue = NullValue.EXCEPTION)
 	@Latitude
-	private Double latitude;
+	private double latitude;
 	@Persistent(nullValue = NullValue.EXCEPTION)
 	private String description;
 	@Persistent(mappedBy = "destination")
@@ -54,19 +54,19 @@ public class Island {
 		return key;
 	}
 
-	public void setLongitude(Double longitude) {
+	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
 
-	public Double getLongitude() {
+	public double getLongitude() {
 		return longitude;
 	}
 
-	public void setLatitude(Double latitude) {
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
 
-	public Double getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
 
