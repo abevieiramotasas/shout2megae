@@ -11,12 +11,15 @@ import com.sun.jersey.api.json.JSONJAXBContext;
 @Provider
 public class JAXBContextResolver implements ContextResolver<JAXBContext> {
 
-	private JAXBContext context;
+	private JAXBContext contextBadger;
+	private JAXBContext contextNatural;
 	private Class<?>[] types = { IslandTOWrapper.class };
+	private Class<?>[] islandTO = { IslandTO.class };
 
 	public JAXBContextResolver() throws JAXBException {
 		this.context = new JSONJAXBContext(JSONConfiguration.badgerFish()
 				.build(), types);
+		this.contextNatural = new JSONJAXBContext(JSONConfiguration.natural().build(), islandTO);
 	}
 
 	@Override
@@ -26,7 +29,10 @@ public class JAXBContextResolver implements ContextResolver<JAXBContext> {
 				return context;
 			}
 		}
-		return null;
+		if(objectType == IslandTO.class) {
+			return contextNatural;
+		}
+		return contextNatural;
 	}
 
 }
