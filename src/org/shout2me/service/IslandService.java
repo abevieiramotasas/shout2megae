@@ -53,36 +53,6 @@ public class IslandService {
 		return String.valueOf(i.getKey().getId());
 	}
 
-	// TODO deletar
-	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	@Path("/create")
-	public String createTeste(@QueryParam("name") String name,
-			@QueryParam("longitude") Double longitude,
-			@QueryParam("latitude") Double latitude,
-			@QueryParam("description") String description,
-			@QueryParam("key") String key) {
-		// validations
-		ValidationUtil.validatesIslandName(name);
-		ValidationUtil.validatesLongitude(longitude);
-		ValidationUtil.validatesLatitude(latitude);
-		ValidationUtil.validatesDescription(description);
-		User u = KeyUtil.getUserByKey(key);
-		ValidationUtil.validatesUserFound(u);
-		// persist
-		Island i = new Island();
-		i.setName(name);
-		i.setLongitude(longitude);
-		i.setLatitude(latitude);
-		i.setDescription(description);
-		i.setRank(0.0);
-		i.setOwner_id(u.getKey().getId());
-		i.setMessages(Collections.<Message> emptyList());
-		IslandDAO i_dao = new IslandDAO(Island.class);
-		i_dao.create(i);
-		return String.valueOf(i.getKey().getId());
-	}
-
 	@GET
 	@Path("/getall")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })

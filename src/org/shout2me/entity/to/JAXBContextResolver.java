@@ -15,6 +15,8 @@ public class JAXBContextResolver implements ContextResolver<JAXBContext> {
 	private Class<?>[] types = { IslandTOWrapper.class };
 
 	public JAXBContextResolver() throws JAXBException {
+		// configuracao de arrays para retornar com notacao de array json
+		// '[...]' para array com um elemento
 		this.context = new JSONJAXBContext(JSONConfiguration.mapped()
 				.arrays("islands").build(), types);
 	}

@@ -46,29 +46,6 @@ public class MessageService {
 		return Response.status(200).build();
 	}
 
-	// TODO deletar
-	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	@Path("/create")
-	public Response createTeste(@QueryParam("text") String text,
-			@QueryParam("topic") String topic,
-			@QueryParam("destination_id") Long destination_id,
-			@QueryParam("key") String key) {
-		// validations
-		ValidationUtil.validatesText(text);
-		ValidationUtil.validatesTopic(topic);
-		// persist
-		User u = KeyUtil.getUserByKey(key);
-		Message m = new Message();
-		m.setText(text);
-		m.setTopic(topic);
-		m.setAuthor_name(u.getName());
-		m.setAuthor_id(u.getKey().getId());
-		MessageDAO m_dao = new MessageDAO(Message.class);
-		m_dao.addMessage(m, destination_id);
-		return Response.status(200).build();
-	}
-
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Path("/getall")

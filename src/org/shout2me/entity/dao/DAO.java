@@ -52,4 +52,8 @@ public abstract class DAO<E> {
 		}
 		return result;
 	}
+
+	public Query getQuery() {
+		return this.getPersistenceManager().newQuery(classe);
+	}
 }

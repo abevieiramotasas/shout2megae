@@ -16,7 +16,6 @@ public class IslandDAO extends DAO<Island> {
 		super(classe);
 	}
 
-	// TODO testar
 	public List<Island> getIslandsByArea(Double longitude, Double latitude,
 			Double distance, Integer maxResults) {
 		Point center = new Point(latitude, longitude);

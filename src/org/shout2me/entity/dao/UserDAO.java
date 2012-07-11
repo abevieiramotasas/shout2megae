@@ -14,8 +14,7 @@ public class UserDAO extends DAO<User> {
 
 	@SuppressWarnings("unchecked")
 	public User findByMail(String mail) {
-		// TODO adicionar método ao DAO<E> para retornar Query já parametrizada?
-		Query query = getPersistenceManager().newQuery(User.class);
+		Query query = getQuery();
 		query.setFilter("mail == mail_user");
 		query.declareParameters("String mail_user");
 		List<User> result = (List<User>) query.execute(mail);
