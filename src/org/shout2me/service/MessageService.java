@@ -18,6 +18,7 @@ import org.shout2me.entity.User;
 import org.shout2me.entity.dao.IslandDAO;
 import org.shout2me.entity.dao.MessageDAO;
 import org.shout2me.entity.to.MessageTO;
+import org.shout2me.entity.to.MessageTOWrapper;
 import org.shout2me.service.util.KeyUtil;
 import org.shout2me.service.util.ValidationUtil;
 
@@ -49,7 +50,7 @@ public class MessageService {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Path("/getall")
-	public List<MessageTO> getAllByIsland(
+	public MessageTOWrapper getAllByIsland(
 			@QueryParam("destination_id") Long destination_id,
 			@QueryParam("limit") Integer limit,
 			@QueryParam("base_date_in_millis") Long base_date_in_millis,
@@ -61,6 +62,8 @@ public class MessageService {
 		for (Message m : messages) {
 			result.add(new MessageTO(m));
 		}
-		return result;
+		MessageTOWrapper m = new MessageTOWrapper();
+		m.setMessages(result);
+		return m;
 	}
 }
